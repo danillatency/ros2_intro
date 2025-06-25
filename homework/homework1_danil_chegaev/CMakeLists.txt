@@ -11,7 +11,6 @@ find_package(rosidl_default_generators REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(turtlesim REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(homework1_danil_chegaev REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
 
@@ -27,16 +26,19 @@ add_executable(commander_node src/commander_node.cpp)
 ament_target_dependencies(commander_node rclcpp geometry_msgs std_msgs)
 
 add_executable(start_server src/start_server.cpp)
-ament_target_dependencies(start_server rclcpp homework1_danil_chegaev std_msgs)
+ament_target_dependencies(start_server rclcpp std_msgs)
+rosidl_target_interfaces(start_server ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 add_executable(turtles_spawner src/turtles_spawner.cpp)
 ament_target_dependencies(turtles_spawner rclcpp turtlesim)
 
 add_executable(collecter_node src/collecter_node.cpp)
-ament_target_dependencies(collecter_node rclcpp homework1_danil_chegaev geometry_msgs turtlesim)
+ament_target_dependencies(collecter_node rclcpp geometry_msgs turtlesim)
+rosidl_target_interfaces(collecter_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 add_executable(mapper_node src/mapper_node.cpp)
-ament_target_dependencies(mapper_node rclcpp homework1_danil_chegaev geometry_msgs)
+ament_target_dependencies(mapper_node rclcpp geometry_msgs)
+rosidl_target_interfaces(mapper_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 add_executable(status_server src/status_server.cpp)
 ament_target_dependencies(status_server rclcpp std_srvs std_msgs)
